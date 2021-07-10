@@ -1,103 +1,120 @@
-import React from 'react';
+import React, { useState } from 'react';
+//material ui
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import { useStyles } from 'components/sign-in/styledSignIn';
+import Typography from '@material-ui/core/Typography';
+//formik
+import { Formik, ErrorMessage } from 'formik';
+//Utils
+import * as Yup from 'yup';
+import { auth, createUserProfileDocument } from 'firebase/firebase.utils';
+//custom
+import { CustomTextField } from 'material-ui/input/input';
+import { CustomButton } from 'material-ui/button/CustomButton'
 
-import FormInput from '../form-input/form-input.component';
-import CustomButton from '../custom-button/custom-button.component';
 
-import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 
-import './sign-up.styles.scss';
 
-class SignUp extends React.Component {
-    constructor() {
-        super();
+const SignupSchema = Yup.object().shape({
+    email: Yup.string().email('Invalid email').required('Email is Required'),
+    password: Yup.string().required('Password is Required'),
+    passwordConfirmation: Yup.string()
+        .oneOf([Yup.ref('password'), null], 'Passwords must match')
+});
 
-        this.state = {
-            displayName: '',
-            email: '',
-            password: '',
-            confirmPassword: ''
-        };
-    }
+const SignIn = () => {
+    const classes = useStyles();
+    const [error, setError] = useState('');
+    const [displayError, setDisplayError] = useState(false);
+    return (
+        <div>
+            <Formik
+                initialValues={{ displayName: '', email: '', password: '', passwordConfirmation: '' }}
+                validationSchema={SignupSchema}
+                onSubmit={async (values) => {
+                    const { displayName, email, password } = values;
+                    console.log(values)
+                    try {
+                        const { user } = await auth.createUserWithEmailAndPassword(
+                            email,
+                            password
+                        );
 
-    handleSubmit = async event => {
-        event.preventDefault();
+                        await createUserProfileDocument(user, { displayName });
+                    } catch (error) {
+                        setError(error.message)
+                        setDisplayError(true)
+                    }
+                }}
 
-        const { displayName, email, password, confirmPassword } = this.state;
+            >
+                {({
+                    values,
+                    handleChange,
+                    handleBlur,
+                    handleSubmit,
+                }) => (
+                    <form onSubmit={handleSubmit} className={classes.root} >
+                        <Grid container spacing={3} >
+                            <Grid item xs={12}>
+                                <Typography color='textSecondary' varant='subtitle1'>Name</Typography>
+                                <CustomTextField
+                                    type='text'
+                                    name='displayName'
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.displayName}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Typography color='textSecondary' varant='subtitle1'>Account</Typography>
+                                <CustomTextField
+                                    type="email"
+                                    name="email"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.email}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Typography color='textSecondary' varant='subtitle1'>Password</Typography>
+                                <CustomTextField
+                                    type="password"
+                                    name="password"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.password}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Typography color='textSecondary' varant='subtitle1'>Confirm Password</Typography>
+                                <CustomTextField
+                                    type="password"
+                                    name="passwordConfirmation"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.passwordConfirmation}
+                                />
+                            </Grid>
 
-        if (password !== confirmPassword) {
-            alert("passwords don't match");
-            return;
-        }
+                            <Grid item xs={12}>
+                                {!displayError ? null : <Typography color='error' variant='caption'>{error}</Typography>}
+                            </Grid>
+                            <Grid item xs={6}>
+                                <CustomButton type="submit" variant='outlined'>
+                                    Submit
+                                </CustomButton>
+                            </Grid>
 
-        try {
-            const { user } = await auth.createUserWithEmailAndPassword(
-                email,
-                password
-            );
+                        </Grid>
 
-            await createUserProfileDocument(user, { displayName });
 
-            this.setState({
-                displayName: '',
-                email: '',
-                password: '',
-                confirmPassword: ''
-            });
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-    handleChange = event => {
-        const { name, value } = event.target;
-
-        this.setState({ [name]: value });
-    };
-
-    render() {
-        const { displayName, email, password, confirmPassword } = this.state;
-        return (
-            <div className='sign-up'>
-                <h2 className='title'>I do not have a account</h2>
-                <span>Sign up with your email and password</span>
-                <form className='sign-up-form' onSubmit={this.handleSubmit}>
-                    <FormInput
-                        type='text'
-                        name='displayName'
-                        value={displayName}
-                        onChange={this.handleChange}
-                        label='Display Name'
-                        required
-                    />
-                    <FormInput
-                        type='email'
-                        name='email'
-                        value={email}
-                        onChange={this.handleChange}
-                        label='Email'
-                        required
-                    />
-                    <FormInput
-                        type='password'
-                        name='password'
-                        value={password}
-                        onChange={this.handleChange}
-                        label='Password'
-                        required
-                    />
-                    <FormInput
-                        type='password'
-                        name='confirmPassword'
-                        value={confirmPassword}
-                        onChange={this.handleChange}
-                        label='Confirm Password'
-                        required
-                    />
-                    <CustomButton type='submit'>SIGN UP</CustomButton>
-                </form>
-            </div>
-        );
-    }
+                    </form>
+                )}
+            </Formik>
+        </div>
+    )
 }
 
-export default SignUp;
+export default SignIn;

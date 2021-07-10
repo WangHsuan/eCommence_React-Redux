@@ -1,24 +1,34 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+//material ui
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import { useStyles } from 'components/menu-item/StyledMenuItem'
 
-import './menu-item.styles.scss'
 
-const MenuItem = ({ title, imageUrl, size, history, linkUrl, match }) => (
-    <div
-        className={`${size} menu-item`}
-        onClick={() => history.push(`${match.url}${linkUrl}`)}
-    >
+
+
+const MenuItem = ({ title, imageUrl, size, history, linkUrl, match }) => {
+    const classes = useStyles();
+    return (
         <div
-            className='background-image'
-            style={{
-                backgroundImage: `url(${imageUrl})`
-            }}
-        />
-        <div className='content'>
-            <h1 className='title'>{title.toUpperCase()}</h1>
-            <span className='subtitle'>SHOP NOW</span>
+            className={`${classes.menuItem}  ${size}`}
+            onClick={() => history.push(`${match.url}${linkUrl}`)}
+        >
+            <div
+                className='background-image'
+                style={{
+                    backgroundImage: `url(${imageUrl})`
+                }}
+            />
+            <Grid container className={classes.content}>
+                <Grid item >
+                    <Typography variant='body1'>{title.toUpperCase()}</Typography>
+                </Grid>
+                <Grid item>Shop Now</Grid>
+            </Grid>
         </div>
-    </div>
-);
+    );
+}
 
 export default withRouter(MenuItem);
