@@ -25,7 +25,7 @@ const MenuItem = ({ title, imageUrl, size, history, linkUrl, match }) => {
                 <Grid item >
                     <Typography variant='body1'>{title.toUpperCase()}</Typography>
                 </Grid>
-                <Grid item>Shop Now</Grid>
+                {/* <Grid item>Shop Now</Grid> */}
             </Grid>
         </div>
     );
