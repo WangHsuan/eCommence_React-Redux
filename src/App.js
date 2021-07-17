@@ -11,7 +11,7 @@ import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selectors';
 import { createStructuredSelector } from 'reselect';
 import CheckoutPage from './pages/checkout/checkout.component';
-
+import {selectCollectionsForPreview} from 'redux/shop/shop.selectors'
 
 
 
@@ -34,9 +34,11 @@ class App extends React.Component {
           });
         });
       }
-     console.log('1234')
+    
       setCurrentUser(userAuth);
+     
     });
+    
   }
 
   componentWillUnmount() {
@@ -69,7 +71,8 @@ class App extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
+  collectionArray:selectCollectionsForPreview
 });
 
 
