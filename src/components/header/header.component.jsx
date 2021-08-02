@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { auth } from '../../firebase/firebase.utils';
 import CartIcon from '../cart-icon/cart-icon.component';
+import Typography from '@material-ui/core/Typography';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 import { ReactComponent as Logo } from '../../assets/Gap.svg';
 import { createStructuredSelector } from 'reselect';
@@ -18,18 +19,29 @@ const Header = ({ currentUser, hidden }) => (
         </Link>
         <div className='options'>
             <Link className='option' to='/shop'>
-                SHOP
+                <Typography variant='subtitle1'>
+                    Shop
+                </Typography>
+
             </Link>
             <Link className='option' to='/shop'>
-                CONTACT
+                <Typography variant='subtitle1'>
+                    Contact
+                </Typography>
+
             </Link>
             {currentUser ? (
                 <div className='option' onClick={() => auth.signOut()}>
-                    SIGN OUT
+                    <Typography variant='subtitle1'>
+                        Sign Out
+                    </Typography>
                 </div>
             ) : (
                 <Link className='option' to='/signin'>
-                    SIGN IN
+                    <Typography variant='subtitle1'>
+                        Sign In
+                    </Typography>
+
                 </Link>
             )}
             <CartIcon />

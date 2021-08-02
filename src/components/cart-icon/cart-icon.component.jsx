@@ -14,9 +14,9 @@ const CartIcon = ({ toggleCartHidden, itemCount }) => {
     const classes = useStyles();
     return (
         <div className={classes.cartIcon} onClick={toggleCartHidden}>
-            <ShoppingCartIcon className={classes.shoppingIcon} color='action' />
+            <ShoppingCartIcon className={classes.shoppingIcon} style={{ fill: '#e8ebe9' }} />
 
-            <Typography className='iconCount' color='textSecondary'>{itemCount}</Typography>
+            <Typography className='iconCount' style={{ color: '#000000' }}>{itemCount}</Typography>
 
         </div>
     );

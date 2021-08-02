@@ -11,8 +11,9 @@ import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selectors';
 import { createStructuredSelector } from 'reselect';
 import CheckoutPage from './pages/checkout/checkout.component';
-import {selectCollectionsForPreview} from 'redux/shop/shop.selectors'
-
+import {selectCollectionsForPreview} from 'redux/shop/shop.selectors';
+import CollectionItemPage from 'pages/collection-item/collectionItem';
+import WithSpinner from 'components/with-spinner/with-spinner.component';
 
 
 class App extends React.Component {
@@ -53,6 +54,7 @@ class App extends React.Component {
           <Route exact path='/' component={HomePage} />
           <Route path='/shop' component={ShopPage} />
           <Route exact path='/checkout' component={CheckoutPage} />
+          <Route exact path='/collectionItem' component={CollectionItemPage} />
           <Route
             exact
             path='/signin'

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import MenuItem from '../menu-item/menu-item.component';
+import Grid from '@material-ui/core/Grid'
 import { useStyles } from 'components/directory/StyledDirectory';
 //redux
 import { connect } from 'react-redux';
@@ -13,9 +14,11 @@ const Directory = ({ sections }) => {
     const classes = useStyles();
     return (
         <div className={classes.directoryMmenu}>
+
             {sections.map(({ id, ...otherSectionProps }) => (
                 <MenuItem key={id} {...otherSectionProps} />
             ))}
+
         </div>
     );
 
