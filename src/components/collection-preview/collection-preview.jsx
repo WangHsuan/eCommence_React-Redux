@@ -6,14 +6,13 @@ import Grid from '@material-ui/core/Grid';
 
 import './collection-preview.styles.scss';
 
-const CollectionPreview = ({ title, items }) => (
+const CollectionPreview = ({ title, items, category }) => (
     <div className='collection-preview'>
-        {/* <h1 className='title'>{title.toUpperCase()}</h1> */}
-        <Typography variant='h5'>{title}</Typography>
+
         <div className='preview'>
             <Grid container spacing={1}>
                 {items
-                    .filter((item, idx) => idx < 4)
+                    .filter((item, idx) => title === category)
                     .map(item => (
                         <Grid item xs={12} sm={6} md={4} lg={3}>
                             <CollectionItem key={item.id} item={item} />

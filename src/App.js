@@ -13,7 +13,7 @@ import { createStructuredSelector } from 'reselect';
 import CheckoutPage from './pages/checkout/checkout.component';
 import {selectCollectionsForPreview} from 'redux/shop/shop.selectors';
 import CollectionItemPage from 'pages/collection-item/collectionItem';
-import WithSpinner from 'components/with-spinner/with-spinner.component';
+import Checkout from 'pages/checkout/checkout';
 
 
 class App extends React.Component {
@@ -53,7 +53,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path='/' component={HomePage} />
           <Route path='/shop' component={ShopPage} />
-          <Route exact path='/checkout' component={CheckoutPage} />
+          <Route exact path='/checkout' component={Checkout} />
           <Route exact path='/collectionItem' component={CollectionItemPage} />
           <Route
             exact

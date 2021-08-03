@@ -24,12 +24,7 @@ const Header = ({ currentUser, hidden }) => (
                 </Typography>
 
             </Link>
-            <Link className='option' to='/shop'>
-                <Typography variant='subtitle1'>
-                    Contact
-                </Typography>
 
-            </Link>
             {currentUser ? (
                 <div className='option' onClick={() => auth.signOut()}>
                     <Typography variant='subtitle1'>
