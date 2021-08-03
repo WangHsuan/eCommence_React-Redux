@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const InfoSchema = Yup.object().shape({
-    name: Yup.string().required('Email is Required'),
+    name: Yup.string().required('Name is Required'),
     phone: Yup.string().required('Phone is Required'),
 });
 

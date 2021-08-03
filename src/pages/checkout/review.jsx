@@ -17,25 +17,34 @@ import { mergeClasses } from '@material-ui/styles';
 
 const Review = ({ cartItems, total, info }) => (
     <div className='checkout-page'>
-        <div className='checkout-header'>
-            <div className='header-block'>
-                <span>Product</span>
-            </div>
-            <div className='header-block'>
-                <span>Description</span>
-            </div>
-            <div className='header-block'>
-                <span>Quantity</span>
-            </div>
-            <div className='header-block'>
-                <span>Price</span>
-            </div>
-            <div className='header-block'>
-                <span>Remove</span>
-            </div>
-        </div>
+        <Grid container>
+            <Grid item xs={3}>
+                <Typography variant='subtitle1'>
+                    Product
+                </Typography>
+            </Grid>
+            <Grid item xs={3}>
+                <Typography variant='subtitle1'>
+                    Description
+                </Typography>
+            </Grid>
+            <Grid item xs={3}>
+                <Typography variant='subtitle1'>
+                    Quantity
+                </Typography>
+            </Grid>
+            <Grid item xs={2}>
+                <Typography variant='subtitle1'>
+                    Price
+                </Typography>
+            </Grid>
+            <Grid item xs={1}>
+
+            </Grid>
+
+        </Grid>
         {cartItems.map(cartItem => (
-            <CheckoutItem key={cartItem.id} cartItem={cartItem} />
+            <CheckoutItem key={cartItem.id} cartItem={cartItem} review={true} />
         ))}
         <div className='total'>Total: ${total}</div>
         <Grid container style={{ width: '100%', height: '20rem', margin: '15px', backgroundColor: '#f7f7f5', borderRadius: '5px', padding: '10px' }}>

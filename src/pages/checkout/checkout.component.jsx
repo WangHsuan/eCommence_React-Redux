@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import StripeCheckoutButton from 'components/stripe-button/stripe-button.component'
 import CheckoutItem from '../../components/checkout-item/checkout-item.component';
+import Grid from '@material-ui/core/Grid';
+import Divider from '@material-ui/core/Divider'
 
 import {
     selectCartItems,
@@ -10,28 +12,41 @@ import {
 } from '../../redux/cart/cart.selectors';
 
 import './checkout.styles.scss';
+import { Typography } from '@material-ui/core';
 
 const CheckoutPage = ({ cartItems, total }) => (
     <div className='checkout-page'>
-        <div className='checkout-header'>
-            <div className='header-block'>
-                <span>Product</span>
-            </div>
-            <div className='header-block'>
-                <span>Description</span>
-            </div>
-            <div className='header-block'>
-                <span>Quantity</span>
-            </div>
-            <div className='header-block'>
-                <span>Price</span>
-            </div>
-            <div className='header-block'>
-                <span>Remove</span>
-            </div>
-        </div>
+
+        <Grid container>
+            <Grid item xs={3}>
+                <Typography variant='subtitle1'>
+                    Product
+                </Typography>
+            </Grid>
+            <Grid item xs={3}>
+                <Typography variant='subtitle1'>
+                    Description
+                </Typography>
+            </Grid>
+            <Grid item xs={3}>
+                <Typography variant='subtitle1'>
+                    Quantity
+                </Typography>
+            </Grid>
+            <Grid item xs={2}>
+                <Typography variant='subtitle1'>
+                    Price
+                </Typography>
+            </Grid>
+            <Grid item xs={1}>
+                <Typography variant='subtitle1'>
+                    Remove
+                </Typography>
+            </Grid>
+
+        </Grid>
         {cartItems.map(cartItem => (
-            <CheckoutItem key={cartItem.id} cartItem={cartItem} />
+            <CheckoutItem key={cartItem.id} cartItem={cartItem} review={false} />
         ))}
         <div className='total'>Total: ${total}</div>
 

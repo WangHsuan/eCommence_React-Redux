@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Grid from '@material-ui/core/Grid'
 
 import {
     clearItemFromCart,
@@ -9,27 +10,39 @@ import {
 
 import './checkout-item.styles.scss';
 
-const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
+const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem, review }) => {
     const { name, imageUrl, price, quantity } = cartItem;
     return (
         <div className='checkout-item'>
-            <div className='image-container'>
-                <img src={imageUrl} alt='item' />
-            </div>
-            <span className='name'>{name}</span>
-            <span className='quantity'>
-                <div className='arrow' onClick={() => removeItem(cartItem)}>
-                    &#10094;
-                </div>
-                <span className='value'>{quantity}</span>
-                <div className='arrow' onClick={() => addItem(cartItem)}>
-                    &#10095;
-                </div>
-            </span>
-            <span className='price'>{price}</span>
-            <div className='remove-button' onClick={() => clearItem(cartItem)}>
-                &#10005;
-            </div>
+            <Grid container>
+                <Grid item xs={3}>
+                    <img src={imageUrl} alt='item' style={{ height: '5rem', width: '5rem' }} />
+                </Grid>
+                <Grid item xs={3}>
+                    <span className='name'>{name}</span>
+                </Grid>
+                <Grid item xs={3}>
+                    <span className='quantity'>
+                        {!review ? <div className='arrow' onClick={() => removeItem(cartItem)}>
+                            &#10094;
+                        </div> : null}
+
+                        <span className='value'>{quantity}</span>
+                        {!review ? <div className='arrow' onClick={() => addItem(cartItem)}>
+                            &#10095;
+                        </div> : null}
+
+                    </span>
+                </Grid>
+                <Grid item xs={2}>
+                    <span className='price'>{price}</span>
+                </Grid>
+                <Grid item xs={1}>
+                    {!review ? <div className='remove-button' onClick={() => clearItem(cartItem)}>
+                        &#10005;
+                    </div> : null}
+                </Grid>
+            </Grid>
         </div>
     );
 };
