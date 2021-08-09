@@ -23,9 +23,9 @@ const CheckoutPage = ({ cartItems, total }) => (
                     Product
                 </Typography>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={4}>
                 <Typography variant='subtitle1'>
-                    Description
+                    Name
                 </Typography>
             </Grid>
             <Grid item xs={3}>
@@ -33,14 +33,14 @@ const CheckoutPage = ({ cartItems, total }) => (
                     Quantity
                 </Typography>
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={1}>
                 <Typography variant='subtitle1'>
                     Price
                 </Typography>
             </Grid>
             <Grid item xs={1}>
                 <Typography variant='subtitle1'>
-                    Remove
+
                 </Typography>
             </Grid>
 

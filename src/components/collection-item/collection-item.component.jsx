@@ -50,7 +50,7 @@ const CollectionItem = ({ item, addItem }) => {
 
             </CardActionArea>
             <CardActions className={classes.customButton}>
-                <CustomButton onClick={() => addItem(item)} inverted >
+                <CustomButton onClick={() => addItem(item)}  >
                     Add to cart
                 </CustomButton>
             </CardActions>

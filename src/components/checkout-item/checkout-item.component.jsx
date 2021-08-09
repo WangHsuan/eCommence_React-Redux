@@ -32,6 +32,7 @@ const useStyles = makeStyles(theme => ({
     },
     quantity: {
         display: 'flex',
+        margin: '0 auto',
         '& .arrow': {
             cursor: 'pointer',
         },
@@ -50,11 +51,11 @@ const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem, review }) => {
     const { name, imageUrl, price, quantity } = cartItem;
     return (
         <div className={classes.checkItem}>
-            <Grid container>
+            <Grid container justifyContent='center'>
                 <Grid item xs={3}>
                     <img src={imageUrl} alt='item' style={{ height: '5rem', width: '5rem' }} />
                 </Grid>
-                <Grid item xs={3}>
+                <Grid item xs={4}>
                     <span className='name'>{name}</span>
                 </Grid>
                 <Grid item xs={3}>
@@ -70,7 +71,7 @@ const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem, review }) => {
 
                     </span>
                 </Grid>
-                <Grid item xs={2}>
+                <Grid item xs={1}>
                     <span className='price'>{price}</span>
                 </Grid>
                 <Grid item xs={1}>

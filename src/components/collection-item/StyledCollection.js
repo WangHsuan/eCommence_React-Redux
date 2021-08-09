@@ -5,14 +5,14 @@ export const useStyles = makeStyles((theme) => ({
         width: '17rem',
         height: '370px',
         position: 'relative',
-        '& .custom-button': {
+        '& .MuiButton-root': {
             position: 'absolute',
             top: '70%',
             left: '25%',
             display: 'none',
         },
         '&:hover': {
-            '& .custom-button': {
+            '& .MuiButton-root': {
                 display: 'flex',
             },
 
