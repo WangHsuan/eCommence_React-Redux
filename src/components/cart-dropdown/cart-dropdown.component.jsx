@@ -12,10 +12,7 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import './cart-dropdown.styles.scss';
+
 
 const useStyles = makeStyles({
     root: {
@@ -82,27 +79,6 @@ const CartDropdown = ({ cartItems, history, dispatch }) => {
         </Card>
     )
 }
-// (
-//     <div className='cart-dropdown'>
-//         <div className='cart-items'>
-//             {cartItems.length ? (
-//                 cartItems.map(cartItem => (
-//                     <CartItem key={cartItem.id} item={cartItem} />
-//                 ))
-//             ) : (
-//                 <span className='empty-message'>Your cart is empty</span>
-//             )}
-//         </div>
-//         <CustomButton
-//             onClick={() => {
-//                 history.push('/checkout');
-//                 dispatch(toggleCartHidden());
-//             }}
-//         >
-//             GO TO CHECKOUT
-//         </CustomButton>
-//     </div>
-// );
 
 const mapStateToProps = createStructuredSelector({
     cartItems: selectCartItems
