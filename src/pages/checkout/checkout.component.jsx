@@ -11,7 +11,7 @@ import {
     selectCartTotal
 } from '../../redux/cart/cart.selectors';
 
-import './checkout.styles.scss';
+
 import { Typography } from '@material-ui/core';
 
 const CheckoutPage = ({ cartItems, total }) => (
